@@ -4,6 +4,6 @@ public class SpectralTest extends RandomnessTest {
 
   public SpectralTest(){
 
-  }
+  } // SpectralTest
 
 }

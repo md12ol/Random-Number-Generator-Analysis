@@ -4,9 +4,11 @@ import Generators.InversiveCongruentialGenerator;
 import Generators.JavaGenerator;
 import Tests.ChiSquaredTest;
 import Tests.SpectralTest;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 /**
  * Runs a statistical analysis on multiple pseudo-random number generators.  Displays output in
@@ -15,15 +17,13 @@ import java.io.UnsupportedEncodingException;
 public class Main {
 
   public static void main(String[] args) {
-    PrintWriter out = null;
+    Writer out = null;
     try {
-      out = new PrintWriter("Output.txt", "UTF-8");
-    } catch (FileNotFoundException e) {
+      out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Output.txt"),
+          "utf-8"));
+    } catch (IOException e) {
       e.printStackTrace();
-      System.out.println("Error creating output file");
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-      System.out.println("Error using UTF-8 encoding");
+      System.out.println("Error creating Writer");
     }
     print("Michael Dubé\nCOSC 4P03 Final Project\n", out);
 
@@ -36,18 +36,21 @@ public class Main {
     SpectralTest spectralTest = new SpectralTest();
   } // main
 
-  private static void print(String toPrint, PrintWriter out) {
-    out.print(toPrint);
+  private static void print(String toPrint, Writer out) {
+    try {
+      out.write(toPrint);
+    } catch (IOException e) {
+      e.printStackTrace();
+      System.out.println("Error writing to file");
+    }
     System.out.print(toPrint);
   } // print
 
-  private static void print(int toPrint, PrintWriter out) {
-    out.print(toPrint);
-    System.out.print(toPrint);
+  private static void print(int toPrint, Writer out) {
+    print(String.valueOf(toPrint), out);
   } // print
 
-  private static void print(double toPrint, PrintWriter out) {
-    out.print(toPrint);
-    System.out.print(toPrint);
+  private static void print(double toPrint, Writer out) {
+    print(String.valueOf(toPrint), out);
   } // print
 }

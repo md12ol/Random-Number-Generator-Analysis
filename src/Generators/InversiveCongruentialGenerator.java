@@ -4,6 +4,6 @@ public class InversiveCongruentialGenerator extends RandomNumberGenerator {
   
   public InversiveCongruentialGenerator(){
 
-  }
+  } // InversiveCongruentialGenerator
 
 }

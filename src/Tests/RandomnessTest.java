@@ -4,6 +4,6 @@ public class RandomnessTest {
 
   public RandomnessTest(){
 
-  }
+  } // RandomnessTest
 
 }

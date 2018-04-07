@@ -4,6 +4,6 @@ public class RandomNumberGenerator {
 
   public RandomNumberGenerator(){
 
-  }
+  } // RandomNumberGenerator
 
 }
