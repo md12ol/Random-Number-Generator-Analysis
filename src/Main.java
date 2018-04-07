@@ -17,6 +17,7 @@ import java.io.Writer;
 public class Main {
 
   public static void main(String[] args) {
+    // Prepare output
     Writer out = null;
     try {
       out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Output.txt"),
@@ -25,15 +26,26 @@ public class Main {
       e.printStackTrace();
       System.out.println("Error creating Writer");
     }
+    assert out != null;
     print("Michael Dubé\nCOSC 4P03 Final Project\n", out);
 
+    // Generators
     BlumBlumShub blumGen = new BlumBlumShub();
     InversiveCongruentialGenerator congruentialGen = new InversiveCongruentialGenerator();
     CompoundInversiveGenerator compoundGen = new CompoundInversiveGenerator();
     JavaGenerator javaGen = new JavaGenerator();
 
+    // Tests
     ChiSquaredTest chaiTest = new ChiSquaredTest();
     SpectralTest spectralTest = new SpectralTest();
+
+    // Close output
+    try {
+      out.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+      System.out.println("Error closing writer");
+    }
   } // main
 
   private static void print(String toPrint, Writer out) {
