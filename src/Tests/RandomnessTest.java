@@ -2,7 +2,7 @@ package Tests;
 
 public class RandomnessTest {
 
-  public RandomnessTest(){
+  public RandomnessTest() {
 
   } // RandomnessTest
 
