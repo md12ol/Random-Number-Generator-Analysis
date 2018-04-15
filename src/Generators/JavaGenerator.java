@@ -12,13 +12,13 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
   @Override
   public boolean nextBoolean() {
     return super.nextBoolean();
-  }
+  } // nextBoolean
 
   @Override
   public int nextInt(int min, int lessThan) throws IllegalArgumentException {
     RandomNumberGenerator.testRange(min, lessThan);
     return min + super.nextInt(lessThan - min);
-  }
+  } // nextInt
 
   @Override
   public ArrayList<Boolean> booleanList(int length) throws IllegalArgumentException {
@@ -28,7 +28,7 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
       list.add(super.nextBoolean());
     }
     return null;
-  }
+  } // booleanList
 
   @Override
   public ArrayList<Integer> intList(int min, int lessThan, int length)
@@ -40,5 +40,5 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
       list.add(nextInt(min, lessThan));
     }
     return null;
-  }
+  } // intList
 }

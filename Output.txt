@@ -1,2 +1,18 @@
 Michael Dubé
 COSC 4P03 Final Project
+
+Naive Test Results for Generators.BlumBlumShub
+Number of samples: 100000
+
+Boolean Results
+Value	Percent
+False	50.019999999999996
+True	49.980000000000004
+
+Integer Results
+Min: 5	Max: 7
+Value	Percent
+5	33.481
+6	33.056999999999995
+7	33.461999999999996
+

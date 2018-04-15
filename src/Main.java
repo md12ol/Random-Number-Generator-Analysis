@@ -41,7 +41,7 @@ public class Main {
       System.out.println("Error creating Writer");
     }
     assert out != null;
-    print("Michael Dubé\nCOSC 4P03 Final Project\n", out);
+    print("Michael Dubé\nCOSC 4P03 Final Project\n\n", out);
 
     // Generators
     BlumBlumShub blumGen = new BlumBlumShub(RAND_GEN, 5);
@@ -52,7 +52,7 @@ public class Main {
     // Tests
     ChiSquaredTest chaiTest = new ChiSquaredTest();
     SpectralTest spectralTest = new SpectralTest();
-    NaiveTest naiveTest = new NaiveTest();
+    NaiveTest naiveTest = new NaiveTest(out, 5, 8, 100000, blumGen);
 
     // Close output
     try {
@@ -63,6 +63,12 @@ public class Main {
     }
   } // main
 
+  /**
+   * Prints toPrint to console and to out.
+   *
+   * @param toPrint what is to be printed
+   * @param out where toPrint is to be printed
+   */
   private static void print(String toPrint, Writer out) {
     try {
       out.write(toPrint);
@@ -71,13 +77,5 @@ public class Main {
       System.out.println("Error writing to file");
     }
     System.out.print(toPrint);
-  } // print
-
-  private static void print(int toPrint, Writer out) {
-    print(String.valueOf(toPrint), out);
-  } // print
-
-  private static void print(double toPrint, Writer out) {
-    print(String.valueOf(toPrint), out);
   } // print
 }

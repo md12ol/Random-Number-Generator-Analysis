@@ -5,20 +5,33 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Outlines common methods that all random number generators need to implement.
+ * Outlines common methods that all generators need to implement and provides utility methods that
+ * are needed by some of the generators.
  */
 public interface RandomNumberGenerator {
 
   /**
    * Implements Gordon's algorithm for generating large strong primes.  Algorithm found within
-   * Chapter 4 of Handbook of Applied Cryptography by A. Menezes, P. Van Oorschot, and S. Vanstone.
-   * A prime is returned with probability 1 - 2^(-100).  This prime has length ~bitLength bits.
+   * Chapter 4 of Handbook of Applied Cryptography by A. Menezes, P. Van Oorschot, and S. Vanstone
+   * which is included as 'Handbook of Applied Crytography Chapter 4 - Public Key Parameters.pdf.' A
+   * prime is returned with probability 1 - 2^(-100).  This prime has length ~bitLength bits.
    *
    * @param rand Random number generator
    * @param bitLength Approximate length of prime returned
    * @return Probable prime of length ~bitLength bits with probability of 1 - 2^(-100) being prime
    */
   static BigInteger getPrime(Random rand, int bitLength) {
+    // Declare BigInteger values needed for arithmetic
+    BigInteger rminus2;
+    BigInteger minus1 = new BigInteger("-1");
+    BigInteger one = new BigInteger("1");
+    BigInteger two = new BigInteger("2");
+
+    // Algorithm variables not otherwise organized
+    BigInteger p; // Prime being returned
+    BigInteger r; // Intermediate prime used for finding p
+    BigInteger p0; // Intermediate value used for finding p
+
     // Probable primes of size 512 bits
     BigInteger s = BigInteger.probablePrime(bitLength / 2, rand);
     BigInteger t = BigInteger.probablePrime(bitLength / 2, rand);
@@ -27,22 +40,11 @@ public interface RandomNumberGenerator {
     BigInteger i0 = new BigInteger(16, rand);
     BigInteger j0 = new BigInteger(16, rand);
 
-    // Iterating through i0 + offset with offset = 0, 1, 2, ... until desired result
+    // For iterating through i0 + offset with offset = 0, 1, 2, ... until desired result
     BigInteger i;
     BigInteger offset;
 
-    // Declare BigInteger values needed for arithmetic
-    BigInteger rminus2;
-    BigInteger minus1 = new BigInteger("-1");
-    BigInteger one = new BigInteger("1");
-    BigInteger two = new BigInteger("2");
-
-    // Other algorithm variables
-    BigInteger r; // Intermediate prime used for finding p
-    BigInteger p0; // Intermediate value used for finding p
-    BigInteger p; // Prime being returned
-
-    // Find prime r which is used to find prime p
+    // Find prime r
     offset = new BigInteger("0");
     do {
       i = i0.add(offset); // i = i0 + offset
@@ -61,50 +63,38 @@ public interface RandomNumberGenerator {
       offset = offset.add(one);
     } while (!p.isProbablePrime(100)); // Continue if p is not prime
     return p;
-  }
-
-  /**
-   * Converts and returns the provided int value to an int between min (inclusive) and lessThan
-   * (exclusive).  Returns value if it is already normalized.
-   *
-   * @param value input value to be normalized
-   * @param min minimum value of returned int
-   * @param lessThan the int returned will be less than this
-   * @return int greater than or equal to min and less than lessThan
-   */
-  static int normalize(int value, int min, int lessThan) {
-    return min + (value % (lessThan - min));
-  }
+  } // getPrime
 
   /**
    * Tests if lessThan is greater than min.  If not, an IllegalArguementException is thrown.
    *
    * @param min lower bound of range (inclusive)
    * @param lessThan upper bound of range (exclusive)
-   * @throws IllegalArgumentException if y is less than or equal to x
+   * @throws IllegalArgumentException if lessThan is less than or equal to min
    */
   static void testRange(int min, int lessThan) throws IllegalArgumentException {
     if (lessThan <= min) {
       throw new IllegalArgumentException("Cannot return a value greater than or equal to min and "
           + "less than lessThan when lessThan is less than or equal to min.");
     }
-  }
+  } // testRange
 
   /**
    * Tests if length is greater than 0.  If not, an IllegalArguementException is thrown.
    *
    * @param length length of list
+   * @throws IllegalArgumentException if lench is less than or equal to 0
    */
   static void testSize(int length) throws IllegalArgumentException {
     if (length < 1) {
       throw new IllegalArgumentException("Cannot return a list of length less than 1");
     }
-  }
+  } // testSize
 
   /**
    * Returns the next boolean value from the random number generator.
    *
-   * @return output from random number generator
+   * @return boolean from random number generator
    */
   boolean nextBoolean();
 
