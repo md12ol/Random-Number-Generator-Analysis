@@ -1,5 +1,6 @@
 package Generators;
 
+import static java.lang.Math.pow;
 import static java.math.BigInteger.ONE;
 
 import java.math.BigInteger;
@@ -15,10 +16,10 @@ public class BlumBlumShub implements RandomNumberGenerator {
   private BigInteger q;
 
   public BlumBlumShub(Random r, long s) {
+    this.rand = r;
     if (s < 2) {
       throw new IllegalArgumentException("Seed must be greater than 1");
     }
-    this.rand = r;
     // Constants
     BigInteger three = new BigInteger("3");
     BigInteger four = new BigInteger("4");
@@ -50,7 +51,28 @@ public class BlumBlumShub implements RandomNumberGenerator {
   @Override
   public int nextInt(int min, int lessThan) throws IllegalArgumentException {
     RandomNumberGenerator.testRange(min, lessThan);
-    return 0;
+
+    // Get the number of bits used to represent the difference
+    int difference = lessThan - min;
+    BigInteger bigDifference = new BigInteger(String.valueOf(difference));
+    int numBits = bigDifference.bitLength();
+
+    // Find the random number
+    ArrayList<Boolean> randomList;
+    BigInteger randomBig;
+    do {
+      randomList = booleanList(numBits);
+      int randInt = 0;
+      // Get decimal representation of binary number
+      for (int i = randomList.size() - 1; i >= 0; i--) {
+        if (randomList.get(i)) {
+          randInt += pow(2, i);
+        }
+      }
+      randomBig = new BigInteger(String.valueOf(randInt));
+      // While randomBig is greater than or equal to bigDifference
+    } while (randomBig.max(bigDifference).equals(randomBig) || randomBig.equals(bigDifference));
+    return randomBig.intValue() + min;
   }
 
   @Override
@@ -68,6 +90,10 @@ public class BlumBlumShub implements RandomNumberGenerator {
       throws IllegalArgumentException {
     RandomNumberGenerator.testRange(min, lessThan);
     RandomNumberGenerator.testSize(length);
-    return null;
+    ArrayList<Integer> list = new ArrayList<>();
+    for (int i = 0; i < length; i++) {
+      list.add(nextInt(min, lessThan));
+    }
+    return list;
   }
 }

@@ -3,6 +3,7 @@ import Generators.CompoundInversiveGenerator;
 import Generators.InversiveCongruentialGenerator;
 import Generators.JavaGenerator;
 import Tests.ChiSquaredTest;
+import Tests.NaiveTest;
 import Tests.SpectralTest;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -51,6 +52,7 @@ public class Main {
     // Tests
     ChiSquaredTest chaiTest = new ChiSquaredTest();
     SpectralTest spectralTest = new SpectralTest();
+    NaiveTest naiveTest = new NaiveTest();
 
     // Close output
     try {

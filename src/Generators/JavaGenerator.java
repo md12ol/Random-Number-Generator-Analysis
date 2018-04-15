@@ -17,8 +17,7 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
   @Override
   public int nextInt(int min, int lessThan) throws IllegalArgumentException {
     RandomNumberGenerator.testRange(min, lessThan);
-    return RandomNumberGenerator.normalize(super.nextInt(), min, lessThan);
-    // TODO: Reconsider this normalize function
+    return min + super.nextInt(lessThan - min);
   }
 
   @Override
@@ -38,7 +37,7 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
     RandomNumberGenerator.testSize(length);
     ArrayList<Integer> list = new ArrayList<>();
     for (int i = 0; i < length; i++) {
-      list.add(RandomNumberGenerator.normalize(super.nextInt(), min, lessThan));
+      list.add(nextInt(min, lessThan));
     }
     return null;
   }
