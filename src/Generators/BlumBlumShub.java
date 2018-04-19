@@ -17,6 +17,7 @@ import java.util.Random;
  *   Blum Blum Shub Overview:
  *   p, q are large primes such that p ≡ 3 (mod 4), q ≡ 3 (mod 4), and |p| = |q| (length in bits)
  *   M = p * q
+ *   n >= 0
  *   x_n+1 = (x_n)^2 mod M
  *   x_0 is chosen such that gcd(x_0, M) = 1 and x_0 > 1
  *   Output of x_n: least significant bit of x_n
@@ -31,7 +32,7 @@ public class BlumBlumShub implements RandomNumberGenerator {
    * Creates instance of Blum Blum Shub random number generator using rand for any random values
    * that need to be generated and seed as the value of x_0.
    *
-   * @param rand random number generator for creation of random value
+   * @param rand random number generator for creation of random values
    * @param seed value x_0
    */
   public BlumBlumShub(Random rand, long seed) {
@@ -46,19 +47,25 @@ public class BlumBlumShub implements RandomNumberGenerator {
     // Find p, q such that they are both congruent to 3 mod 4 and |p| = |q|
     BigInteger p, q;
     do {
-      p = RandomNumberGenerator.getPrime(rand, 512);
+      p = RandomNumberGenerator.getBigPrime(rand, 512);
     } while (!p.mod(four).equals(three));
     do {
-      q = RandomNumberGenerator.getPrime(rand, 512);
+      q = RandomNumberGenerator.getBigPrime(rand, 512);
     } while (!q.mod(four).equals(three) || q.bitLength() != p.bitLength());
 
     // Calculate M
     M = p.multiply(q);
     if (!bigSeed.gcd(M).equals(ONE)) {
-      throw new IllegalArgumentException("The seed is not congruent to product of the primes");
+      throw new IllegalArgumentException("The seed is not congruent to product of the primes p "
+          + "and q");
     }
     prevVal = bigSeed;
   } // BlumBlumShub
+
+  @Override
+  public int nextInt() {
+    return nextInt(0, 100);
+  }
 
   @Override
   public boolean nextBoolean() {

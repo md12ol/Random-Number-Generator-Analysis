@@ -10,11 +10,6 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
   } // JavaGenerator
 
   @Override
-  public boolean nextBoolean() {
-    return super.nextBoolean();
-  } // nextBoolean
-
-  @Override
   public int nextInt(int min, int lessThan) throws IllegalArgumentException {
     RandomNumberGenerator.testRange(min, lessThan);
     return min + super.nextInt(lessThan - min);

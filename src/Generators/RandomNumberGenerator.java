@@ -20,7 +20,7 @@ public interface RandomNumberGenerator {
    * @param bitLength Approximate length of prime returned
    * @return Probable prime of length ~bitLength bits with probability of 1 - 2^(-100) being prime
    */
-  static BigInteger getPrime(Random rand, int bitLength) {
+  static BigInteger getBigPrime(Random rand, int bitLength) {
     // Declare BigInteger values needed for arithmetic
     BigInteger rminus2;
     BigInteger minus1 = new BigInteger("-1");
@@ -32,13 +32,13 @@ public interface RandomNumberGenerator {
     BigInteger r; // Intermediate prime used for finding p
     BigInteger p0; // Intermediate value used for finding p
 
-    // Probable primes of size 512 bits
+    // Probable primes of size bitLength/2 bits
     BigInteger s = BigInteger.probablePrime(bitLength / 2, rand);
     BigInteger t = BigInteger.probablePrime(bitLength / 2, rand);
 
-    // Random integers of size ~512 bits
-    BigInteger i0 = new BigInteger(16, rand);
-    BigInteger j0 = new BigInteger(16, rand);
+    // Random integers of size 4 bits
+    BigInteger i0 = new BigInteger(4, rand);
+    BigInteger j0 = new BigInteger(4, rand);
 
     // For iterating through i0 + offset with offset = 0, 1, 2, ... until desired result
     BigInteger i;
@@ -63,7 +63,11 @@ public interface RandomNumberGenerator {
       offset = offset.add(one);
     } while (!p.isProbablePrime(100)); // Continue if p is not prime
     return p;
-  } // getPrime
+  } // getBigPrime
+
+  static int getPrime(Random rand, int bitLength) {
+    return getBigPrime(rand, bitLength).intValue();
+  }
 
   /**
    * Tests if lessThan is greater than min.  If not, an IllegalArguementException is thrown.
@@ -90,6 +94,14 @@ public interface RandomNumberGenerator {
       throw new IllegalArgumentException("Cannot return a list of length less than 1");
     }
   } // testSize
+
+  /**
+   * Returns the next integer from the random number generator.  This returned integer either has
+   * some default range or the range is set to all possible values returned by the generator.
+   *
+   * @return next integer from random number generator
+   */
+  int nextInt();
 
   /**
    * Returns the next boolean value from the random number generator.

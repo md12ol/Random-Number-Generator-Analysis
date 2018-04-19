@@ -3,7 +3,7 @@ import Generators.CompoundInversiveGenerator;
 import Generators.InversiveCongruentialGenerator;
 import Generators.JavaGenerator;
 import Tests.ChiSquaredTest;
-import Tests.NaiveTest;
+import Tests.SimpleTest;
 import Tests.SpectralTest;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -27,7 +27,7 @@ import java.util.Random;
  */
 public class Main {
 
-  private static final long RANDOM_SEED = 5;
+  private static final long RANDOM_SEED = 125;
   private static final Random RAND_GEN = new Random(RANDOM_SEED);
 
   public static void main(String[] args) {
@@ -45,14 +45,20 @@ public class Main {
 
     // Generators
     BlumBlumShub blumGen = new BlumBlumShub(RAND_GEN, 5);
-    InversiveCongruentialGenerator congruentialGen = new InversiveCongruentialGenerator();
-    CompoundInversiveGenerator compoundGen = new CompoundInversiveGenerator();
+    InversiveCongruentialGenerator congruentialGen = new InversiveCongruentialGenerator(RAND_GEN,
+        11, 12);
+    int[] bVals = {3, 5, 7};
+    int[] seeds = {4, 8, 6};
+    CompoundInversiveGenerator compoundGen = new CompoundInversiveGenerator(RAND_GEN, 3,
+        bVals, seeds);
     JavaGenerator javaGen = new JavaGenerator(RANDOM_SEED);
 
     // Tests
     ChiSquaredTest chaiTest = new ChiSquaredTest();
     SpectralTest spectralTest = new SpectralTest();
-    NaiveTest naiveTest = new NaiveTest(out, 5, 8, 100000, blumGen);
+    SimpleTest simpleTest = new SimpleTest(out, 0, 100, 100000, blumGen);
+    simpleTest = new SimpleTest(out, 0, 100, 100000, congruentialGen);
+    simpleTest = new SimpleTest(out, 0, 100, 100000, compoundGen);
 
     // Close output
     try {
