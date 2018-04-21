@@ -4,7 +4,6 @@ import Generators.InversiveCongruentialGenerator;
 import Generators.JavaGenerator;
 import Tests.ChiSquaredTest;
 import Tests.SimpleTest;
-import Tests.SpectralTest;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,7 +25,10 @@ import java.util.Random;
  * This code follows, as closely as possible, Google's Java Style Guide.
  */
 public class Main {
-
+  // TODO: Gather data
+  // TODO: Final confirmation of code
+  // TODO: Final confirmation of JavaDoc
+  // TODO: Write Report
   private static final long RANDOM_SEED = 125;
   private static final Random RAND_GEN = new Random(RANDOM_SEED);
 
@@ -54,11 +56,16 @@ public class Main {
     JavaGenerator javaGen = new JavaGenerator(RANDOM_SEED);
 
     // Tests
-    ChiSquaredTest chaiTest = new ChiSquaredTest();
-    SpectralTest spectralTest = new SpectralTest();
-    SimpleTest simpleTest = new SimpleTest(out, 0, 100, 100000, blumGen);
-    simpleTest = new SimpleTest(out, 0, 100, 100000, congruentialGen);
-    simpleTest = new SimpleTest(out, 0, 100, 100000, compoundGen);
+    SimpleTest simpleTest;
+    ChiSquaredTest chaiTest;
+    simpleTest = new SimpleTest(out, javaGen);
+//    simpleTest = new SimpleTest(out, blumGen);
+    simpleTest = new SimpleTest(out, congruentialGen);
+    simpleTest = new SimpleTest(out, compoundGen);
+    chaiTest = new ChiSquaredTest(out, javaGen);
+//    chaiTest = new ChiSquaredTest(out, blumGen);
+    chaiTest = new ChiSquaredTest(out, congruentialGen);
+    chaiTest = new ChiSquaredTest(out, compoundGen);
 
     // Close output
     try {

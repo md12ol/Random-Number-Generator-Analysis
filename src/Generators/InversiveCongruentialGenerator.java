@@ -103,7 +103,7 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
       prevVal = seed;
     } else {
       throw new IllegalArgumentException("This combination of b value and seed has not resulted "
-          + "in an Inversive Congruential Generator with maximal period after trying 100 primes.");
+          + "in an Inversive Congruential Generator with maximal period after trying 1000 primes.");
     }
   }
 

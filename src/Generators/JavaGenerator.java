@@ -22,7 +22,7 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
     for (int i = 0; i < length; i++) {
       list.add(super.nextBoolean());
     }
-    return null;
+    return list;
   } // booleanList
 
   @Override
@@ -34,6 +34,6 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
     for (int i = 0; i < length; i++) {
       list.add(nextInt(min, lessThan));
     }
-    return null;
+    return list;
   } // intList
 }

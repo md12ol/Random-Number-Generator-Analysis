@@ -88,9 +88,6 @@ public class CompoundInversiveGenerator implements RandomNumberGenerator {
       sum = ZERO;
       for (InversiveCongruentialGenerator gen : generators) {
         bigValue = new BigInteger(String.valueOf(gen.nextInt()));
-        // TODO: Investigate further
-//        bigPrime = new BigInteger(String.valueOf(gen.getPrime()));
-//        sum = sum.add(bigValue.multiply(bigPrimeProduct).divide(bigPrime));
         sum = sum.add(bigValue);
       }
       bigResult = sum.mod(bigPrimeProduct);
