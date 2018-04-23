@@ -65,9 +65,16 @@ public interface RandomNumberGenerator {
     return p;
   } // getBigPrime
 
+  /**
+   * Returns a prime with probability 1 - 2^(-100).  This prime has length ~bitLength bits.
+   *
+   * @param rand Random number generator
+   * @param bitLength Approximate length of prime returned
+   * @return Probable prime of length ~bitLength bits with probability of 1 - 2^(-100) being prime
+   */
   static int getPrime(Random rand, int bitLength) {
     return getBigPrime(rand, bitLength).intValue();
-  }
+  } // getPrime
 
   /**
    * Tests if lessThan is greater than min.  If not, an IllegalArguementException is thrown.
@@ -87,21 +94,13 @@ public interface RandomNumberGenerator {
    * Tests if length is greater than 0.  If not, an IllegalArguementException is thrown.
    *
    * @param length length of list
-   * @throws IllegalArgumentException if lench is less than or equal to 0
+   * @throws IllegalArgumentException if length is less than or equal to 0
    */
   static void testSize(int length) throws IllegalArgumentException {
     if (length < 1) {
       throw new IllegalArgumentException("Cannot return a list of length less than 1");
     }
   } // testSize
-
-  /**
-   * Returns the next integer from the random number generator.  This returned integer either has
-   * some default range or the range is set to all possible values returned by the generator.
-   *
-   * @return next integer from random number generator
-   */
-  int nextInt();
 
   /**
    * Returns the next boolean value from the random number generator.
@@ -111,8 +110,7 @@ public interface RandomNumberGenerator {
   boolean nextBoolean();
 
   /**
-   * Returns the next int between min (inclusive) and lessThan (exclusive) from the random number
-   * generator.
+   * Returns the next int in range [min, lessThan) from the random number generator.
    *
    * @param min minimum value of the int returned
    * @param lessThan the int returned will be less than this
@@ -120,6 +118,14 @@ public interface RandomNumberGenerator {
    * @throws IllegalArgumentException if lessThan is less than or equal to min
    */
   int nextInt(int min, int lessThan) throws IllegalArgumentException;
+
+  /**
+   * Returns the next integer from the random number generator.  This returned integer either has
+   * some default range or the range is set to all possible values returned by the generator.
+   *
+   * @return next integer from random number generator
+   */
+  int nextInt();
 
   /**
    * Returns a list of size length of booleans from the random number generator.
@@ -131,8 +137,8 @@ public interface RandomNumberGenerator {
   ArrayList<Boolean> booleanList(int length) throws IllegalArgumentException;
 
   /**
-   * Returns a list of size length of ints between min (inclusive) and lessThan (exclusive) from the
-   * random number generator.
+   * Returns a list of size length of ints in range [min, lessThan) from the random number
+   * generator.
    *
    * @param min minimum value of the ints
    * @param lessThan the ints returned will bt less than this
@@ -142,4 +148,14 @@ public interface RandomNumberGenerator {
    * than 1
    */
   ArrayList<Integer> intList(int min, int lessThan, int length) throws IllegalArgumentException;
+
+  /**
+   * Returns a list of size length of ints from the random number generator.
+   *
+   * @param length length of returned list
+   * @return list of ints
+   * @throws IllegalArgumentException if lessThan is less than or equal to min or if length is less
+   * than 1
+   */
+  ArrayList<Integer> intList(int length) throws IllegalArgumentException;
 }

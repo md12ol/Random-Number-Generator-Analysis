@@ -20,6 +20,7 @@ import java.util.Random;
  *   x_n+1 = { a * (x_n)^(-1) + b (mod p)    x_n >= 1}
  *           { b                             x_n == 0}
  *   x_0 is chosen such that it is non-negative and less than p
+ *   x_n can have range [0, p) with period length p when parameters are chosen correctly
  * </pre>
  */
 public class InversiveCongruentialGenerator implements RandomNumberGenerator {
@@ -31,54 +32,12 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
 
   /**
    * Creates instance of Inversive Congruential random number generator with the provided values for
-   * the generator's parameters.
-   *
-   * @param prime value of p
-   * @param aVal value of a
-   * @param bVal value of b
-   * @param seed value of x_0
-   */
-  private InversiveCongruentialGenerator(int prime, int aVal, int bVal, int seed) {
-    this.p = prime;
-    this.a = aVal;
-    this.b = bVal;
-    prevVal = seed;
-  }
-
-  /**
-   * Creates instance of Inversive Congruential random number generator with the provided values for
-   * the generator's parameters.  The value of a is determined using an algorithm defined within
-   * "Compound Inversive Congruential Generator Design Algorithm.pdf" and implemented below.
-   *
-   * @param prime value of p
-   * @param bVal value of b
-   * @param seed value of x_0
-   */
-  public InversiveCongruentialGenerator(int prime, int bVal, int seed) {
-    if (bVal < 1) {
-      throw new IllegalArgumentException("The value for b must be a positive integer");
-    }
-    if (seed < 0 || seed >= prime) {
-      throw new IllegalArgumentException("Seed must be non-negative and less than the prime "
-          + "provided.");
-    }
-    if (findAndSetA(prime, bVal, seed)) {
-      p = prime;
-      b = bVal;
-      prevVal = seed;
-    } else {
-      throw new IllegalArgumentException("This combination of prime, b value and seed does not "
-          + "create an Inversive Congruential Generator with maximal period.");
-    }
-  }
-
-  /**
-   * Creates instance of Inversive Congruential random number generator with the provided values for
    * the generator's parameters.  A prime number is determined randomly and the value of a is
    * determined using an algorithm defined within "Compound Inversive Congruential Generator Design
-   * Algorithm.pdf" and implemented below.
+   * Algorithm.pdf" and implemented below.  This will only initialize a generator with maximal
+   * period.
    *
-   * @param prime value of p
+   * @param rand random number generator for random creation of parameters
    * @param bVal value of b
    * @param seed value of x_0
    */
@@ -104,6 +63,50 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
     } else {
       throw new IllegalArgumentException("This combination of b value and seed has not resulted "
           + "in an Inversive Congruential Generator with maximal period after trying 1000 primes.");
+    }
+  }
+
+  /**
+   * Creates instance of Inversive Congruential random number generator with the provided values for
+   * the generator's parameters.  No maximal period is guaranteed.
+   *
+   * @param prime value of p
+   * @param aVal value of a
+   * @param bVal value of b
+   * @param seed value of x_0
+   */
+  private InversiveCongruentialGenerator(int prime, int aVal, int bVal, int seed) {
+    this.p = prime;
+    this.a = aVal;
+    this.b = bVal;
+    prevVal = seed;
+  }
+
+  /**
+   * Creates instance of Inversive Congruential random number generator with the provided values for
+   * the generator's parameters.  The value of a is determined using an algorithm defined within
+   * "Compound Inversive Congruential Generator Design Algorithm.pdf" and implemented below.  This
+   * will only initialize a generator with maximal period.
+   *
+   * @param prime value of p
+   * @param bVal value of b
+   * @param seed value of x_0
+   */
+  public InversiveCongruentialGenerator(int prime, int bVal, int seed) {
+    if (bVal < 1) {
+      throw new IllegalArgumentException("The value for b must be a positive integer");
+    }
+    if (seed < 0 || seed >= prime) {
+      throw new IllegalArgumentException("Seed must be non-negative and less than the prime "
+          + "provided.");
+    }
+    if (findAndSetA(prime, bVal, seed)) {
+      p = prime;
+      b = bVal;
+      prevVal = seed;
+    } else {
+      throw new IllegalArgumentException("This combination of prime, b value and seed does not "
+          + "create an Inversive Congruential Generator with maximal period.");
     }
   }
 
@@ -240,32 +243,22 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
 
   @Override
   public boolean nextBoolean() {
-    return nextInt(0, p) % 2 == 1; // Even and odd equally likely
+    int temp = nextInt();
+    while (temp == p - 1) { // Ensures that even and odd equally likely
+      temp = nextInt();
+    }
+    return nextInt() % 2 == 1;
   } // nextBoolean
 
   @Override
-  public int nextInt() {
-    return nextInt(0, p);
-  }
-
-  @Override
   public int nextInt(int min, int lessThan) throws IllegalArgumentException {
-    if (lessThan > p) {
-      throw new IllegalArgumentException("Value of lessThan is equal to or greater than the prime"
-          + " number p.  This is not permitted.");
-    }
+    RandomNumberGenerator.testRange(min, lessThan);
     int difference = lessThan - min;
     int quotient = p / difference;
-    /*
-    Ensures that all values in range {min, lessThan) are evenly likely by only accepting new
-    values for prevValue, x, that are less than quotient * difference.  This means that all
-    possible values of x mod difference have the same probability of being chosen.
-    Example: min = 0, lessThan = 5, p = 23, difference = 5, quotient = 4
-    range of accepted x values: [0,19]
-    range of output from x mod difference: [0, 4]
-    Each value in [0, 4] will occur 4 times in range [0,19] for x and therefore, all values in
-    range [0, 4] are equally likely to occur
-    */
+    // Ensures that each value in [min, lessThan) is equally likely to be chosen by grabbing
+    // output from the random number generator until a number < quotient * difference is returned.
+    // This will ensure that each value has the same probability of being chosen from prevVal %
+    // difference.
     do {
       if (prevVal == 0) {
         prevVal = b;
@@ -281,7 +274,13 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
   } // nextInt
 
   @Override
-  public ArrayList<Boolean> booleanList(int length) {
+  public int nextInt() {
+    return nextInt(0, p);
+  } // nextInt
+
+  @Override
+  public ArrayList<Boolean> booleanList(int length) throws IllegalArgumentException {
+    RandomNumberGenerator.testSize(length);
     ArrayList<Boolean> list = new ArrayList<>();
     for (int i = 0; i < length; i++) {
       list.add(nextBoolean());
@@ -299,5 +298,10 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
       list.add(nextInt(min, lessThan));
     }
     return list;
+  } // intList
+
+  @Override
+  public ArrayList<Integer> intList(int length) throws IllegalArgumentException {
+    return intList(0, p, length);
   } // intList
 }

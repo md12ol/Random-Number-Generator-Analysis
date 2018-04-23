@@ -19,7 +19,7 @@ import java.util.Random;
  *   period with sequence: (x_j_n) where 1 <= j <= r and n >= 0
  *   x_n with n >= 0 is the output of this compound congruential generator
  *   x_n = x_1_n + x_2_n + ... + x_r_n mod T where T = p_1 * p_2 * ... * p_r
- *   Period of generator will be T
+ *   x_n can have range [0, T) with period length T when parameters are chosen correctly
  * </pre>
  */
 public class CompoundInversiveGenerator implements RandomNumberGenerator {
@@ -29,7 +29,7 @@ public class CompoundInversiveGenerator implements RandomNumberGenerator {
 
   /**
    * Creates a Compound Inversive Generator with the provided values for the generator's parameters.
-   * The value of the primes is determined randomly.
+   * The value of the primes is determined randomly.  This generator will have maximal period.
    *
    * @param rand for randomness
    * @param size number of Inversive Congruential Generators within this generator
@@ -41,15 +41,17 @@ public class CompoundInversiveGenerator implements RandomNumberGenerator {
       throw new IllegalArgumentException("The length of the arrays for b values and seeds must be"
           + " greater than or equal to the size of the Compound Congruential Generator.");
     }
-    generators = new InversiveCongruentialGenerator[size];
-    for (int i = 0; i < generators.length; i++) {
-      generators[i] = new InversiveCongruentialGenerator(rand, bVals[i], seeds[i]);
-    }
-    primeProduct = 1;
-    for (InversiveCongruentialGenerator gen : generators) {
-      primeProduct *= gen.getPrime();
-    }
-  }
+    do {
+      generators = new InversiveCongruentialGenerator[size];
+      for (int i = 0; i < generators.length; i++) {
+        generators[i] = new InversiveCongruentialGenerator(rand, bVals[i], seeds[i]);
+      }
+      primeProduct = 1;
+      for (InversiveCongruentialGenerator gen : generators) {
+        primeProduct *= gen.getPrime();
+      }
+    } while (primeProduct < 0); // Prevent over-flows
+  } // CompoundInversiveGenerator
 
   /**
    * Returns the product of the primes which made the Inversive Congruential Generators which make
@@ -59,7 +61,7 @@ public class CompoundInversiveGenerator implements RandomNumberGenerator {
    */
   public int getPrimeProduct() {
     return primeProduct;
-  }
+  } // getPrimeProduct
 
   @Override
   public boolean nextBoolean() {
@@ -67,18 +69,14 @@ public class CompoundInversiveGenerator implements RandomNumberGenerator {
   } // nextBoolean
 
   @Override
-  public int nextInt() {
-    return nextInt(0, primeProduct);
-  }
-
-  @Override
   public int nextInt(int min, int lessThan) throws IllegalArgumentException {
-    if (lessThan > primeProduct) {
-      throw new IllegalArgumentException("Value of lessThan is equal to or greater than the prime"
-          + " product.  This is not permitted.");
-    }
+    RandomNumberGenerator.testRange(min, lessThan);
     int difference = lessThan - min;
     int quotient = primeProduct / difference;
+    // Ensures that each value in [min, lessThan) is equally likely to be chosen by grabbing
+    // output from the random number generator until a number < quotient * difference is returned.
+    // This will ensure that each value has the same probability of being chosen from prevVal %
+    // difference.
     BigInteger sum;
     BigInteger bigValue;
     BigInteger bigPrimeProduct = new BigInteger(String.valueOf(primeProduct));
@@ -96,7 +94,13 @@ public class CompoundInversiveGenerator implements RandomNumberGenerator {
   } // nextInt
 
   @Override
+  public int nextInt() {
+    return nextInt(0, primeProduct);
+  } // nextInt
+
+  @Override
   public ArrayList<Boolean> booleanList(int length) {
+    RandomNumberGenerator.testSize(length);
     ArrayList<Boolean> list = new ArrayList<>();
     for (int i = 0; i < length; i++) {
       list.add(nextBoolean());
@@ -114,5 +118,10 @@ public class CompoundInversiveGenerator implements RandomNumberGenerator {
       list.add(nextInt(min, lessThan));
     }
     return list;
+  } // intList
+
+  @Override
+  public ArrayList<Integer> intList(int length) throws IllegalArgumentException {
+    return intList(0, primeProduct, length);
   } // intList
 }

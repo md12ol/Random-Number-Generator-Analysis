@@ -3,8 +3,17 @@ package Generators;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * A class that extends Random to provide similar functionality to the other generators I
+ * implemented.
+ */
 public class JavaGenerator extends Random implements RandomNumberGenerator {
 
+  /**
+   * Prepares Random generator with seed.
+   *
+   * @param seed seed value
+   */
   public JavaGenerator(long seed) {
     super(seed);
   } // JavaGenerator
@@ -36,4 +45,9 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
     }
     return list;
   } // intList
+
+  @Override
+  public ArrayList<Integer> intList(int length) throws IllegalArgumentException {
+    return intList(0, Integer.MAX_VALUE, length);
+  }
 }

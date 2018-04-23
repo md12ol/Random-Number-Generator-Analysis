@@ -79,10 +79,14 @@ public interface Test {
   } // println
 
   /**
-   * Prints the results from the randomness test applied to integers generated via a random number
-   * generator.
+   * Conducts a randomness test on a list of booleans generated from a random number generator.
    */
-  void printIntResults();
+  void boolTest();
+
+  /**
+   * Conducts a randomness test on a list of integers generated from a random number generator.
+   */
+  void intTest();
 
   /**
    * Prints the results from the randomness test applied to booleans generated via a random number
@@ -91,13 +95,8 @@ public interface Test {
   void printBoolResults();
 
   /**
-   * Conducts a randomness test on a list of integers generated from a random number generator.
+   * Prints the results from the randomness test applied to integers generated via a random number
+   * generator.
    */
-  void intTest();
-
-  /**
-   * Conducts a randomness test on a list of booleans generated from a random number generator.
-   */
-  void boolTest();
-
+  void printIntResults();
 }

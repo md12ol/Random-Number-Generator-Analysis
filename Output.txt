@@ -1,10 +1,9 @@
 Michael Dubé
 COSC 4P03 Final Project
 
-Simple Test Results for Generators.JavaGenerator
+Spread Test Results for Generators.JavaGenerator
 Number of samples: 1000000
 
-Boolean Results
 Value	Percent
 False	49.9384
 True	50.0616
@@ -112,291 +111,445 @@ Value	Percent
 97	0.9986999999999999
 98	1.0052999999999999
 99	0.9926
----------------
-Statistical Results for Integer Test
+
+Spread Test Results for Generators.LinearCongruentialGenerator
+Number of samples: 1000000
+
+Value	Percent
+False	50.0
+True	50.0
+
+Integer Results
+Min: 0	Max: 99
+Value	Percent
+0	0.9969
+1	1.0107
+2	0.9974999999999999
+3	0.9959000000000001
+4	0.9948999999999999
+5	0.9979999999999999
+6	1.0018
+7	1.016
+8	0.9995999999999999
+9	0.9839
+10	1.0018
+11	1.0097
+12	0.9882
+13	1.0187
+14	0.9915
+15	1.0116999999999998
+16	0.9974999999999999
+17	0.9871
+18	1.0037
+19	0.9989
+20	0.9988
+21	1.0085
+22	0.9985
+23	1.0009000000000001
+24	0.9984
+25	0.9927999999999999
+26	0.9961
+27	1.0068000000000001
+28	1.0014
+29	0.9986999999999999
+30	1.0113
+31	0.9988
+32	0.989
+33	1.0247
+34	0.9961
+35	1.0092
+36	1.0012999999999999
+37	0.9875999999999999
+38	1.0198
+39	0.9852
+40	1.0081
+41	0.9879000000000001
+42	1.0075
+43	0.9976
+44	1.005
+45	0.9919000000000001
+46	1.0056
+47	0.9964999999999999
+48	1.0103
+49	1.0185
+50	1.0012
+51	1.0004000000000002
+52	0.9946999999999999
+53	1.0012
+54	0.9853999999999999
+55	1.0046
+56	1.008
+57	0.9997
+58	1.0021
+59	1.0050999999999999
+60	0.9942
+61	0.9941
+62	0.9871
+63	0.9942
+64	0.988
+65	1.0108000000000001
+66	1.0089000000000001
+67	0.9946999999999999
+68	0.9938
+69	1.0108000000000001
+70	0.9986999999999999
+71	1.0109
+72	1.0011
+73	0.9972
+74	1.0048
+75	0.9962000000000001
+76	0.9889
+77	1.0048
+78	0.9924999999999999
+79	1.0071999999999999
+80	1.0228
+81	0.9889
+82	0.9908999999999999
+83	0.9927
+84	0.9954
+85	1.0024
+86	0.9942
+87	0.9745999999999999
+88	1.0244
+89	0.9964999999999999
+90	0.9998
+91	0.9953
+92	0.9854999999999999
+93	0.9853999999999999
+94	1.0021
+95	0.9976
+96	1.0138
+97	0.9991999999999999
+98	1.0011
+99	0.9993
+
+Spread Test Results for Generators.InversiveCongruentialGenerator
+Number of samples: 1000000
+
+Value	Percent
+False	49.462
+True	50.538000000000004
+
+Integer Results
+Min: 0	Max: 99
+Value	Percent
+0	1.0001
+1	0.9998999999999999
+2	0.9997
+3	1.0001
+4	1.0001
+5	0.9998999999999999
+6	0.9998999999999999
+7	0.9998999999999999
+8	1.0
+9	1.0
+10	1.0
+11	1.0004000000000002
+12	0.9998999999999999
+13	0.9998999999999999
+14	1.0
+15	0.9998999999999999
+16	1.0
+17	0.9998999999999999
+18	0.9997
+19	1.0002
+20	1.0001
+21	1.0001
+22	0.9998999999999999
+23	1.0
+24	1.0001
+25	1.0
+26	1.0002
+27	1.0002
+28	0.9998999999999999
+29	1.0003
+30	1.0001
+31	1.0004000000000002
+32	1.0
+33	0.9997
+34	0.9998
+35	0.9998
+36	1.0
+37	1.0001
+38	1.0
+39	0.9998
+40	0.9998
+41	1.0002
+42	0.9998999999999999
+43	1.0
+44	1.0
+45	0.9998999999999999
+46	1.0
+47	1.0001
+48	1.0001
+49	1.0
+50	0.9998
+51	0.9998
+52	1.0003
+53	1.0002
+54	1.0001
+55	1.0
+56	1.0
+57	0.9998999999999999
+58	0.9997
+59	1.0003
+60	1.0003
+61	0.9998999999999999
+62	0.9998999999999999
+63	0.9998999999999999
+64	0.9997
+65	0.9998999999999999
+66	1.0
+67	0.9998
+68	1.0001
+69	1.0001
+70	0.9998999999999999
+71	1.0
+72	1.0001
+73	1.0
+74	1.0
+75	1.0002
+76	1.0
+77	1.0
+78	0.9998
+79	1.0
+80	1.0
+81	1.0003
+82	1.0
+83	1.0003
+84	1.0001
+85	1.0001
+86	0.9998
+87	1.0
+88	0.9998999999999999
+89	1.0001
+90	1.0001
+91	1.0003
+92	0.9998
+93	1.0
+94	0.9998
+95	1.0
+96	1.0
+97	0.9998999999999999
+98	0.9998
+99	1.0
+
+Spread Test Results for Generators.CompoundInversiveGenerator
+Number of samples: 1000000
+
+Value	Percent
+False	49.9833
+True	50.0167
+
+Integer Results
+Min: 0	Max: 99
+Value	Percent
+0	1.0028000000000001
+1	1.0078
+2	0.992
+3	1.0021
+4	0.9941
+5	0.9856999999999999
+6	1.0086
+7	0.987
+8	1.0153
+9	1.0149
+10	1.0119
+11	1.009
+12	0.9998999999999999
+13	0.9958
+14	1.0016
+15	0.9971000000000001
+16	0.9955
+17	0.9913
+18	0.9851000000000001
+19	1.0029
+20	1.0210000000000001
+21	0.9794
+22	0.9958
+23	1.0027
+24	1.0023
+25	0.9788
+26	0.9952000000000001
+27	1.0061
+28	1.0085
+29	0.9827
+30	0.9803
+31	1.0161
+32	1.0094
+33	0.9939
+34	1.0086
+35	1.0015
+36	0.9938
+37	1.015
+38	0.9858
+39	1.0068000000000001
+40	1.0021
+41	1.0030000000000001
+42	1.0065
+43	0.9936999999999999
+44	1.0029
+45	1.0089000000000001
+46	1.0021
+47	0.9959000000000001
+48	1.0154
+49	1.0144
+50	1.0028000000000001
+51	1.0073
+52	0.9929
+53	1.0001
+54	1.0019
+55	1.019
+56	0.9891000000000001
+57	1.0031
+58	0.9833
+59	1.0198
+60	0.9822
+61	0.9889
+62	0.9899
+63	1.0166
+64	0.9914
+65	1.0036
+66	1.0179
+67	0.9985
+68	1.0004000000000002
+69	1.0085
+70	0.9985
+71	1.0058
+72	1.0023
+73	0.9973
+74	0.9924000000000001
+75	1.0024
+76	1.0055
+77	0.9983000000000001
+78	0.9846
+79	0.992
+80	0.9955
+81	0.9962000000000001
+82	0.9924999999999999
+83	1.0033
+84	1.0012
+85	0.9856999999999999
+86	1.0153
+87	1.006
+88	1.0076
+89	1.0050999999999999
+90	1.0052
+91	1.0003
+92	1.0073
+93	0.9965999999999999
+94	0.9908
+95	1.0191999999999999
+96	0.9782000000000001
+97	0.9851000000000001
+98	0.9914
+99	0.9922
+
+Stats Test Results for Generators.JavaGenerator
+Number of samples: 1000000
+
+Integer Results
+Min: 0	Max: 99
 Number of Sample Means Calculated: 1000
 Number of Samples Used to Calculate Each Mean: 1000
 Mean of Means: 49.57513000000003
 Variance of Means: 0.7829151442442444
+95% Confidence Interval: 49.520287983095756 - 49.629972016904304
+Expected mean of 49.5 was within 95% confidence interval: false
 
-Simple Test Results for Generators.InversiveCongruentialGenerator
+Stats Test Results for Generators.LinearCongruentialGenerator
 Number of samples: 1000000
-
-Boolean Results
-Value	Percent
-False	50.076699999999995
-True	49.9233
 
 Integer Results
 Min: 0	Max: 99
-Value	Percent
-0	0.9998
-1	0.9998999999999999
-2	1.0002
-3	0.9998999999999999
-4	1.0
-5	0.9998
-6	0.9997
-7	0.9998999999999999
-8	1.0001
-9	1.0
-10	0.9998999999999999
-11	1.0001
-12	1.0001
-13	1.0002
-14	1.0001
-15	0.9998999999999999
-16	1.0001
-17	1.0
-18	1.0001
-19	1.0001
-20	0.9998999999999999
-21	1.0001
-22	1.0002
-23	1.0001
-24	1.0
-25	1.0002
-26	1.0
-27	1.0
-28	1.0
-29	1.0
-30	0.9998999999999999
-31	1.0001
-32	0.9998999999999999
-33	1.0001
-34	1.0
-35	1.0
-36	1.0002
-37	1.0002
-38	1.0
-39	1.0001
-40	1.0001
-41	0.9998999999999999
-42	1.0
-43	1.0
-44	1.0001
-45	1.0001
-46	1.0001
-47	1.0001
-48	0.9998
-49	1.0
-50	1.0001
-51	0.9998
-52	0.9997
-53	0.9998999999999999
-54	1.0
-55	0.9998999999999999
-56	1.0001
-57	0.9998999999999999
-58	0.9998999999999999
-59	1.0002
-60	0.9998
-61	1.0
-62	0.9998999999999999
-63	0.9995999999999999
-64	1.0
-65	1.0
-66	1.0
-67	0.9998999999999999
-68	1.0002
-69	1.0
-70	1.0
-71	1.0
-72	1.0
-73	0.9998
-74	1.0001
-75	1.0001
-76	1.0001
-77	0.9998999999999999
-78	1.0002
-79	1.0
-80	1.0002
-81	0.9998999999999999
-82	1.0001
-83	1.0001
-84	1.0001
-85	0.9998
-86	1.0
-87	1.0
-88	1.0
-89	1.0
-90	1.0002
-91	0.9998999999999999
-92	1.0
-93	1.0
-94	1.0
-95	0.9995999999999999
-96	0.9998999999999999
-97	1.0
-98	0.9998
-99	1.0002
----------------
-Statistical Results for Integer Test
 Number of Sample Means Calculated: 1000
 Number of Samples Used to Calculate Each Mean: 1000
-Mean of Means: 49.500362
-Variance of Means: 0.06774371066666775
+Mean of Means: 49.53371600000002
+Variance of Means: 0.8838904978418417
+95% Confidence Interval: 49.47544461991932 - 49.59198738008072
+Expected mean of 49.5 was within 95% confidence interval: true
 
-Simple Test Results for Generators.CompoundInversiveGenerator
+Stats Test Results for Generators.InversiveCongruentialGenerator
 Number of samples: 1000000
-
-Boolean Results
-Value	Percent
-False	50.0548
-True	49.9452
 
 Integer Results
 Min: 0	Max: 99
-Value	Percent
-0	0.9908
-1	0.9995
-2	0.988
-3	1.0127000000000002
-4	0.9979
-5	1.0043
-6	0.9962000000000001
-7	0.9946
-8	1.0127000000000002
-9	0.9921
-10	1.0131
-11	0.996
-12	0.987
-13	1.0024
-14	1.0193
-15	1.0158
-16	1.001
-17	1.0026
-18	1.0090999999999999
-19	0.9993
-20	1.023
-21	1.0076
-22	1.0113
-23	1.0030000000000001
-24	0.9961
-25	0.9934999999999999
-26	1.0123
-27	0.9954
-28	0.9998999999999999
-29	1.0006
-30	1.0068000000000001
-31	1.0024
-32	1.0143
-33	0.9959000000000001
-34	0.9917
-35	1.0029
-36	0.9854999999999999
-37	0.9768000000000001
-38	0.9844999999999999
-39	0.9759
-40	1.0132
-41	0.9993
-42	0.9967
-43	1.0006
-44	0.9986999999999999
-45	1.0029
-46	0.9965999999999999
-47	1.0052999999999999
-48	1.0018
-49	0.9921
-50	0.9880999999999999
-51	0.9934999999999999
-52	0.9914
-53	1.0002
-54	1.0055
-55	1.0101
-56	0.9913
-57	1.01
-58	0.9934999999999999
-59	1.0274999999999999
-60	0.9913
-61	0.9837
-62	1.0011
-63	0.9922
-64	0.9904
-65	1.0027
-66	0.9806
-67	1.0003
-68	0.9902
-69	0.9811000000000001
-70	0.9898
-71	0.9981
-72	0.9979
-73	1.0033
-74	1.0103
-75	0.9848000000000001
-76	0.9941
-77	1.0127000000000002
-78	1.0009000000000001
-79	1.0123
-80	1.0
-81	1.0057
-82	0.9994
-83	0.9944
-84	0.9983000000000001
-85	1.0174
-86	0.997
-87	0.997
-88	0.9982
-89	0.9961
-90	1.0111999999999999
-91	1.0078
-92	0.9962000000000001
-93	1.0132
-94	1.0065
-95	0.997
-96	1.0030000000000001
-97	1.0027
-98	0.9957
-99	1.0132999999999999
----------------
-Statistical Results for Integer Test
 Number of Sample Means Calculated: 1000
 Number of Samples Used to Calculate Each Mean: 1000
-Mean of Means: 49.47116799999999
-Variance of Means: 0.8338594712472476
+Mean of Means: 49.500317999999794
+Variance of Means: 0.23390992079679698
+95% Confidence Interval: 49.47034153670385 - 49.53029446329574
+Expected mean of 49.5 was within 95% confidence interval: true
+
+Stats Test Results for Generators.CompoundInversiveGenerator
+Number of samples: 1000000
+
+Integer Results
+Min: 0	Max: 99
+Number of Sample Means Calculated: 1000
+Number of Samples Used to Calculate Each Mean: 1000
+Mean of Means: 49.497184999999995
+Variance of Means: 0.8324124131881883
+95% Confidence Interval: 49.44063594583899 - 49.553734054161
+Expected mean of 49.5 was within 95% confidence interval: true
 
 Chi-Squared Test Results for Generators.JavaGenerator
 Number of samples: 1000000
 Boolean Chi-Squared Value: 0.066564
-Passes Chi-Squared test with 95% confidence interval: false
-Passes Chi-Squared test with 90% confidence interval: false
-Passes Chi-Squared test with 75% confidence interval: true
-Passes Chi-Squared test with 50% confidence interval: true
-Passes Chi-Squared test with 25% confidence interval: true
+Passes Chi-Squared test with 95% CI: false
+Passes Chi-Squared test with 90% CI: false
+Passes Chi-Squared test with 75% CI: true
+Passes Chi-Squared test with 50% CI: true
+Passes Chi-Squared test with 25% CI: true
 Integer Chi-Squared Value: 97.49560000000004
-Passes Chi-Squared test with 95% confidence interval: false
-Passes Chi-Squared test with 90% confidence interval: false
-Passes Chi-Squared test with 75% confidence interval: false
-Passes Chi-Squared test with 50% confidence interval: true
-Passes Chi-Squared test with 25% confidence interval: true
+Passes Chi-Squared test with 95% CI: false
+Passes Chi-Squared test with 90% CI: false
+Passes Chi-Squared test with 75% CI: false
+Passes Chi-Squared test with 50% CI: true
+Passes Chi-Squared test with 25% CI: true
+
+Chi-Squared Test Results for Generators.LinearCongruentialGenerator
+Number of samples: 1000000
+Boolean Chi-Squared Value: 0.0
+Passes Chi-Squared test with 95% CI: true
+Passes Chi-Squared test with 90% CI: true
+Passes Chi-Squared test with 75% CI: true
+Passes Chi-Squared test with 50% CI: true
+Passes Chi-Squared test with 25% CI: true
+Integer Chi-Squared Value: 97.28439999999998
+Passes Chi-Squared test with 95% CI: false
+Passes Chi-Squared test with 90% CI: false
+Passes Chi-Squared test with 75% CI: false
+Passes Chi-Squared test with 50% CI: true
+Passes Chi-Squared test with 25% CI: true
 
 Chi-Squared Test Results for Generators.InversiveCongruentialGenerator
 Number of samples: 1000000
-Boolean Chi-Squared Value: 2.377764
-Passes Chi-Squared test with 95% confidence interval: false
-Passes Chi-Squared test with 90% confidence interval: false
-Passes Chi-Squared test with 75% confidence interval: false
-Passes Chi-Squared test with 50% confidence interval: false
-Passes Chi-Squared test with 25% confidence interval: false
-Integer Chi-Squared Value: 0.013599999999999987
-Passes Chi-Squared test with 95% confidence interval: true
-Passes Chi-Squared test with 90% confidence interval: true
-Passes Chi-Squared test with 75% confidence interval: true
-Passes Chi-Squared test with 50% confidence interval: true
-Passes Chi-Squared test with 25% confidence interval: true
+Boolean Chi-Squared Value: 115.519504
+Passes Chi-Squared test with 95% CI: false
+Passes Chi-Squared test with 90% CI: false
+Passes Chi-Squared test with 75% CI: false
+Passes Chi-Squared test with 50% CI: false
+Passes Chi-Squared test with 25% CI: false
+Integer Chi-Squared Value: 0.027599999999999996
+Passes Chi-Squared test with 95% CI: true
+Passes Chi-Squared test with 90% CI: true
+Passes Chi-Squared test with 75% CI: true
+Passes Chi-Squared test with 50% CI: true
+Passes Chi-Squared test with 25% CI: true
 
 Chi-Squared Test Results for Generators.CompoundInversiveGenerator
 Number of samples: 1000000
-Boolean Chi-Squared Value: 0.906304
-Passes Chi-Squared test with 95% confidence interval: false
-Passes Chi-Squared test with 90% confidence interval: false
-Passes Chi-Squared test with 75% confidence interval: false
-Passes Chi-Squared test with 50% confidence interval: false
-Passes Chi-Squared test with 25% confidence interval: true
-Integer Chi-Squared Value: 111.8686
-Passes Chi-Squared test with 95% confidence interval: false
-Passes Chi-Squared test with 90% confidence interval: false
-Passes Chi-Squared test with 75% confidence interval: false
-Passes Chi-Squared test with 50% confidence interval: false
-Passes Chi-Squared test with 25% confidence interval: false
+Boolean Chi-Squared Value: 0.891136
+Passes Chi-Squared test with 95% CI: false
+Passes Chi-Squared test with 90% CI: false
+Passes Chi-Squared test with 75% CI: false
+Passes Chi-Squared test with 50% CI: false
+Passes Chi-Squared test with 25% CI: true
+Integer Chi-Squared Value: 89.6194
+Passes Chi-Squared test with 95% CI: false
+Passes Chi-Squared test with 90% CI: false
+Passes Chi-Squared test with 75% CI: false
+Passes Chi-Squared test with 50% CI: true
+Passes Chi-Squared test with 25% CI: true
 

@@ -63,11 +63,6 @@ public class BlumBlumShub implements RandomNumberGenerator {
   } // BlumBlumShub
 
   @Override
-  public int nextInt() {
-    return nextInt(0, 100);
-  }
-
-  @Override
   public boolean nextBoolean() {
     BigInteger two = new BigInteger("2");
     prevVal = prevVal.modPow(two, M); // prevVal = (prevVal^2) mod M
@@ -77,7 +72,6 @@ public class BlumBlumShub implements RandomNumberGenerator {
   @Override
   public int nextInt(int min, int lessThan) throws IllegalArgumentException {
     RandomNumberGenerator.testRange(min, lessThan);
-
     // Get the number of bits used to represent the difference
     int difference = lessThan - min - 1; // Do not include lessThan is potential output
     BigInteger bigDifference = new BigInteger(String.valueOf(difference));
@@ -100,6 +94,11 @@ public class BlumBlumShub implements RandomNumberGenerator {
   } // nextInt
 
   @Override
+  public int nextInt() {
+    return nextInt(0, Integer.MAX_VALUE);
+  } // nextInt
+
+  @Override
   public ArrayList<Boolean> booleanList(int length) {
     RandomNumberGenerator.testSize(length);
     ArrayList<Boolean> list = new ArrayList<>();
@@ -119,5 +118,10 @@ public class BlumBlumShub implements RandomNumberGenerator {
       list.add(nextInt(min, lessThan));
     }
     return list;
+  } // intList
+
+  @Override
+  public ArrayList<Integer> intList(int length) throws IllegalArgumentException {
+    return intList(0, Integer.MAX_VALUE, length);
   } // intList
 }
