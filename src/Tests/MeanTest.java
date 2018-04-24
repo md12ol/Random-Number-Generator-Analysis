@@ -8,14 +8,15 @@ import java.io.Writer;
 import java.util.ArrayList;
 
 /**
- * Implements a statistical test for testing the randomness of a random number generator.  Given a
+ * Implements a mean test for testing the randomness of a random number generator.  Given a
  * generator the test is executed and the results of the test are returned.  This test generates
  * 1000 lists of random numbers from the generator of length numSamples/1000.  This allows us to use
  * the central limit theorem as well as the mean test described within the included "Beautiful
  * Testing Chapter 10.pdf" which allows the user to compare the mean and variance between various
- * random number generators.
+ * random number generators and determine if the expected mean falls within the range of the
+ * observed mean from the sample.
  */
-public class StatsTest implements Test {
+public class MeanTest implements Test {
 
   private Writer out;
   private int min;
@@ -29,7 +30,7 @@ public class StatsTest implements Test {
   private double expectedMean;
 
   /**
-   * Complete a stats test on gen using samples number of samples who's value is in the range [min,
+   * Complete a mean test on gen using samples number of samples who's value is in the range [min,
    * lessThan) for the int test.  The results are printed to output.
    *
    * @param output where to place the test results
@@ -38,7 +39,7 @@ public class StatsTest implements Test {
    * @param samples number of samples for the test
    * @param gen random number generator being tested
    */
-  private StatsTest(Writer output, int min, int lessThan, int samples, RandomNumberGenerator gen) {
+  private MeanTest(Writer output, int min, int lessThan, int samples, RandomNumberGenerator gen) {
     if (samples < 1) {
       throw new IllegalArgumentException("The number of samples cannot be less than 1.");
     }
@@ -48,7 +49,7 @@ public class StatsTest implements Test {
     numSamples = samples;
     generator = gen;
     expectedMean = (lessThan - 1.0 - min) / 2.0;
-    Test.println("Stats Test Results for " + gen.getClass().getName(), out);
+    Test.println("Mean Test Results for " + gen.getClass().getName(), out);
     Test.println("Number of samples: " + numSamples, out);
     Test.println("", out);
 
@@ -59,28 +60,28 @@ public class StatsTest implements Test {
       Test.println("Integer test not run as number of possible values was less than 3", out);
       Test.println("Min: " + min + "\tMax: " + (lessThan - 1), out);
     }
-  } // StatsTest
+  } // MeanTest
 
   /**
-   * Complete a stats test on gen and outputs the results to output.
+   * Complete a mean test on gen and outputs the results to output.
    *
    * @param output where to place the test results
    * @param gen random number generator being tested
    */
-  public StatsTest(Writer output, RandomNumberGenerator gen) {
+  public MeanTest(Writer output, RandomNumberGenerator gen) {
     this(output, 0, 100, 1000000, gen);
-  } // StatsTest
+  } // MeanTest
 
   /**
-   * Facilitates running the Stats randomness test on gen once where minimized output will be sent
-   * to output if print is set to true.
+   * Facilitates running the mean randomness test on gen once where minimized output will be sent to
+   * output if print is set to true.
    *
    * @param output where to place the results
    * @param gen random number generator being tested
    * @param print whether or not output should print
    * @throws IllegalArgumentException if runs is less than 1
    */
-  public StatsTest(Writer output, RandomNumberGenerator gen, boolean print) throws
+  public MeanTest(Writer output, RandomNumberGenerator gen, boolean print) throws
       IllegalArgumentException {
     out = output;
     min = 0;
@@ -92,7 +93,7 @@ public class StatsTest implements Test {
     if (print) {
       Test.println(intMean + "\t" + intVariance + "\t" + success(), out);
     }
-  } // StatsTest
+  } // MeanTest
 
   /**
    * Calculates the 95% confidence interval of the mean of the samples and stores it in
@@ -100,7 +101,7 @@ public class StatsTest implements Test {
    */
   private void calcConfidenceInterval() {
     confidenceInterval = 1.960 * sqrt(intVariance) / sqrt(numTests);
-  }
+  } // calcConfidenceInterval
 
   /**
    * Computes the mean of all the doubles within nums.
@@ -154,11 +155,11 @@ public class StatsTest implements Test {
   public boolean success() {
     return intMean - confidenceInterval <= expectedMean
         && intMean + confidenceInterval >= expectedMean;
-  }
+  } // success
 
   @Override
   public void boolTest() throws UnsupportedOperationException {
-    throw new UnsupportedOperationException("This operation is not available for the Stats Test.");
+    throw new UnsupportedOperationException("This operation is not available for the Mean Test.");
   } // boolTest
 
   @Override
@@ -177,7 +178,7 @@ public class StatsTest implements Test {
 
   @Override
   public void printBoolResults() throws UnsupportedOperationException {
-    throw new UnsupportedOperationException("This operation is not available for the Stats Test.");
+    throw new UnsupportedOperationException("This operation is not available for the Mean Test.");
   } // printBoolResults
 
   @Override

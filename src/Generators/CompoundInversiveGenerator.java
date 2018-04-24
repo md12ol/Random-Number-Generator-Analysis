@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Implements Compoud Inversive Generator random number generator.  I will outline the basics below.
+ * Implements Compound Inversive Generator random number generator.  I will outline the basics below.
  * For a quick overview see 'https://en.wikipedia .org/wiki/Inversive_congruential_generator.' For a
  * detailed explanation see the included "Compound Inversive Congruential Generator Design
  * Algorithm.pdf."
@@ -65,7 +65,11 @@ public class CompoundInversiveGenerator implements RandomNumberGenerator {
 
   @Override
   public boolean nextBoolean() {
-    return nextInt(0, primeProduct) % 2 == 1; // Even and odd equally likely
+    int temp = nextInt();
+    while (temp == primeProduct - 1) { // Ensures that even and odd equally likely
+      temp = nextInt();
+    }
+    return temp % 2 == 1;
   } // nextBoolean
 
   @Override

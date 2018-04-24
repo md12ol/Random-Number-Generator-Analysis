@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Implements a spread test for testing the randomness of a random number generator.  Given a
  * generator the test is executed and the results of the test are returned.  The percentage
  * distribution observed for all each of the potential values with the results being returned to the
- * user.  This test was not taken from an academic source and instead acted as a perliminary check
+ * user.  This test was not taken from an academic source and instead acted as a preliminary check
  * to determine if I was implementing the random number generators correctly.
  */
 public class SpreadTest implements Test {

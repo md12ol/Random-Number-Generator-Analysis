@@ -49,5 +49,5 @@ public class JavaGenerator extends Random implements RandomNumberGenerator {
   @Override
   public ArrayList<Integer> intList(int length) throws IllegalArgumentException {
     return intList(0, Integer.MAX_VALUE, length);
-  }
+  } // intList
 }

@@ -4,8 +4,8 @@ import Generators.InversiveCongruentialGenerator;
 import Generators.JavaGenerator;
 import Generators.LinearCongruentialGenerator;
 import Tests.ChiSquaredTest;
+import Tests.MeanTest;
 import Tests.SpreadTest;
-import Tests.StatsTest;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,10 +32,14 @@ public class Main {
   private static final Random RAND_GEN = new Random(RANDOM_SEED);
 
   public static void main(String[] args) {
-//    displayResults();
-    gatherDataForReport();
+//    displayResults(); // Run this to see some cool stuff from the generators
+    gatherDataForReport(); // Run this to generate data for the report
   } // main
 
+  /**
+   * Runs all the generators against all the tests and places results in Output.txt and on the
+   * console.
+   */
   private static void displayResults() {
     // Prepare output
     Writer out = null;
@@ -66,11 +70,11 @@ public class Main {
     new SpreadTest(out, linearGen);
     new SpreadTest(out, congruentialGen);
     new SpreadTest(out, compoundGen);
-    new StatsTest(out, javaGen);
-    new StatsTest(out, blumGen);
-    new StatsTest(out, linearGen);
-    new StatsTest(out, congruentialGen);
-    new StatsTest(out, compoundGen);
+    new MeanTest(out, javaGen);
+    new MeanTest(out, blumGen);
+    new MeanTest(out, linearGen);
+    new MeanTest(out, congruentialGen);
+    new MeanTest(out, compoundGen);
     new ChiSquaredTest(out, javaGen);
     new ChiSquaredTest(out, blumGen);
     new ChiSquaredTest(out, linearGen);
@@ -86,6 +90,11 @@ public class Main {
     }
   }
 
+  /**
+   * Completes a statistical report for all generators on the Mean and Chi-Squared test using 30
+   * runs.  Results are placed in five files: blumResults.txt, compoundResults.txt,
+   * congruentialResults.txt, javaResults.txt and linearResults.txt.
+   */
   private static void gatherDataForReport() {
     JavaGenerator javaGen;
     BlumBlumShub blumGen;
@@ -127,13 +136,13 @@ public class Main {
     assert congruentialResults != null;
     assert compoundResults != null;
 
-    // Stats Tests
+    // Mean Tests
     println("Mean\t\tVariance\t\tPassed", javaResults);
     println("Mean\t\tVariance\t\tPassed", blumResults);
     println("Mean\t\tVariance\t\tPassed", linearResults);
     println("Mean\t\tVariance\t\tPassed", congruentialResults);
     println("Mean\t\tVariance\t\tPassed", compoundResults);
-    StatsTest test;
+    MeanTest test;
     for (int run = 0; run < 30; run++) {
       javaGen = new JavaGenerator(RAND_GEN.nextInt(1000));
       blumGen = new BlumBlumShub(RAND_GEN, 5);
@@ -143,23 +152,23 @@ public class Main {
       bVals = new int[]{3, 5, 7};
       seeds = new int[]{4, 8, 6};
       compoundGen = new CompoundInversiveGenerator(RAND_GEN, 3, bVals, seeds);
-      test = new StatsTest(javaResults, javaGen, true);
+      test = new MeanTest(javaResults, javaGen, true);
       if (test.success()) {
         javaPasses++;
       }
-      test = new StatsTest(blumResults, blumGen, true);
+      test = new MeanTest(blumResults, blumGen, true);
       if (test.success()) {
         blumPasses++;
       }
-      test = new StatsTest(linearResults, linearGen, true);
+      test = new MeanTest(linearResults, linearGen, true);
       if (test.success()) {
         linearPasses++;
       }
-      test = new StatsTest(congruentialResults, congruentialGen, true);
+      test = new MeanTest(congruentialResults, congruentialGen, true);
       if (test.success()) {
         congruentialPasses++;
       }
-      test = new StatsTest(compoundResults, compoundGen, true);
+      test = new MeanTest(compoundResults, compoundGen, true);
       if (test.success()) {
         compoundPasses++;
       }
@@ -226,8 +235,14 @@ public class Main {
     System.out.print(toPrint);
   } // print
 
+  /**
+   * Print toPrint and a new line to console and to out.
+   *
+   * @param toPrint what is to be printed
+   * @param out where toPrint is to be printed
+   */
   private static void println(String toPrint, Writer out) {
     print(toPrint, out);
     print("\n", out);
-  }
+  } // printLn
 }

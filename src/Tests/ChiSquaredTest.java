@@ -75,7 +75,7 @@ public class ChiSquaredTest implements Test {
    */
   public ChiSquaredTest(Writer output, RandomNumberGenerator gen) {
     this(output, 0, 100, 1000000, gen);
-  }
+  } // ChiSquaredTest
 
   /**
    * Facilitates running the Chi-Squared randomness test on gen once where minimized output will be
@@ -113,10 +113,10 @@ public class ChiSquaredTest implements Test {
       Test.println(boolChiResult + "\t" + boolPassed + "\t" + intChiResult + "\t" +
           intPassed, out);
     }
-  }
+  } // ChiSquaredTest
 
   /**
-   * Determines what the overall observed error is according to the equation explained in "Besutiful
+   * Determines what the overall observed error is according to the equation explained in "Beautiful
    * Testing Chapter 10.pdf."  The equation: Error = SUM(for all possible outputs o) [(o_observed -
    * o_expected)^2 / o_expected]
    *

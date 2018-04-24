@@ -13,15 +13,12 @@ import java.util.Random;
  * <pre>
  *   Linear Congruential Generator Overview:
  *   The following restrictions on parameters will ensure a generator of maximal period
- *   x_0 is a positive integer
- *   a and b are integers
- *   m is a positive integer greater than x_0, a and b
- *   b and m have gcd(b, m) = 1
- *   For all p, prime factors of m, a ≡ 1 (mod p)
- *   If 4 is a factor of m then a ≡ 1 (mod 4)
+ *   x_0 and b are positive integer
+ *   a is a positive integer such that a > 0 and a ≡ 1 (mod 4)
+ *   m is a power of 2 such that x_0, a and b
  *   n >= 0
  *   x_n+1 = a * x_n + b (mod m)
- *   x_n can have range [0, m) with period length m when parameters are chosen correctly
+ *   x_n can have range [0, m) with maximal period length m
  * </pre>
  */
 public class LinearCongruentialGenerator implements RandomNumberGenerator {
@@ -61,6 +58,15 @@ public class LinearCongruentialGenerator implements RandomNumberGenerator {
     b = bVal;
     prevVal = seed;
   } // LinearCongruentialGenerator
+
+  /**
+   * Returns a.
+   *
+   * @return a
+   */
+  public int getA() {
+    return a;
+  } // getA
 
   /**
    * Returns m.

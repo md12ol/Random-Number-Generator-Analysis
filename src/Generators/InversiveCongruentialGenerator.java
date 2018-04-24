@@ -14,7 +14,7 @@ import java.util.Random;
  * <pre>
  *   Inversive Congruential Generator Overview:
  *   p is a prime number greater than or equal to 5
- *   a, b are positive integers such that gcd(a, b) = 1
+ *   a, b are positive integers
  *   n >= 0
  *   (x_n)^(-1) is the modular multiplicative inverse of x_n: x_n * (x_n)^(-1) ≡ 1 (mod p)
  *   x_n+1 = { a * (x_n)^(-1) + b (mod p)    x_n >= 1}
@@ -64,7 +64,7 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
       throw new IllegalArgumentException("This combination of b value and seed has not resulted "
           + "in an Inversive Congruential Generator with maximal period after trying 1000 primes.");
     }
-  }
+  } // InversiveCongruentialGenerator
 
   /**
    * Creates instance of Inversive Congruential random number generator with the provided values for
@@ -80,7 +80,7 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
     this.a = aVal;
     this.b = bVal;
     prevVal = seed;
-  }
+  } // InversiveCongruentialGenerator
 
   /**
    * Creates instance of Inversive Congruential random number generator with the provided values for
@@ -108,7 +108,7 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
       throw new IllegalArgumentException("This combination of prime, b value and seed does not "
           + "create an Inversive Congruential Generator with maximal period.");
     }
-  }
+  } // InversiveCongruentialGenerator
 
   /**
    * Implements an algorithm from "Compound Inversive Congruential Generator Design Algorithm .pdf"
@@ -123,26 +123,24 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
    */
   public boolean findAndSetA(int prime, int bVal, int seed) {
     int potA;
-    for (int c = 1; c < prime; c++) {
+    for (int c = 0; c < prime; c++) {
       if (notSquares(prime, c)) {
         if (sufficientPeriod(prime, c)) {
           potA = (int) pow(bVal, 2) / (c + 2);
-          if (gcd(potA, bVal) == 1) {
-            if (generatorPeriod(prime, potA, bVal, seed) == prime) {
-              a = potA;
-              return true;
-            }
+          if (generatorPeriod(prime, potA, bVal, seed) == prime) {
+            a = potA;
+            return true;
           }
         }
       }
     }
     return false;
-  }
+  } // findAndSetA
 
   /**
    * Returns true if c + 2 and c^2 - 4 are not squares.  If they are not squares, then then the
-   * function f(x) = x^2 - cx + 1 is irreducibale over the field F_p.  This is a necessary condition
-   * for creating an Inversive Congruential Generator of maximal period.  In order to retrun true
+   * function f(x) = x^2 - cx + 1 is irreducible over the field F_p.  This is a necessary condition
+   * for creating an Inversive Congruential Generator of maximal period.  In order to return true
    * the following must be satisfied: (c + 2) mod prime != c^2 and (c^2 - 4) mod prime != c^2.  More
    * information is available at "Compound Inversive Congruential Generator Design Algorithm.pdf"
    *
@@ -154,10 +152,10 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
     int v1 = (c + 2) % (prime);
     int v2 = (int) ((pow(c, 2) - 4) % (prime));
     return v1 != pow(c, 2) && v2 != pow(c, 2);
-  }
+  } // notSquares
 
   /**
-   * Checks if the values of prime and c retult in a sequence of period prime + 1 or not.  The
+   * Checks if the values of prime and c result in a sequence of period prime + 1 or not.  The
    * sequence being checked is defined as y_0 = 0, y_1 = 1, y_n+2 = c * y_n+1 - y_n.  If this
    * sequence has length prime + 1 then f(x) = x^2 - cx + 1 is an IMP polynomial which is a
    * necessary condition for creating a period of maximal length.  More information is available at
@@ -186,21 +184,7 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
       }
     }
     return false;
-  }
-
-  /**
-   * Returns the greatest common divisor of one and two.
-   *
-   * @param one first int
-   * @param two second int
-   * @return greatest common divisor of one and two
-   */
-  private int gcd(int one, int two) {
-    BigInteger bigOne = new BigInteger(String.valueOf(one));
-    BigInteger bigTwo = new BigInteger(String.valueOf(two));
-    BigInteger gcdBig = bigOne.gcd(bigOne);
-    return gcdBig.intValue();
-  }
+  } // sufficientPeriod
 
   /**
    * Creates an Inversive Congruential Generator with the proposed values and then returns the
@@ -216,7 +200,7 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
   private int generatorPeriod(int p, int a, int b, int seed) {
     InversiveCongruentialGenerator test = new InversiveCongruentialGenerator(p, a, b, seed);
     return test.getPeriod();
-  }
+  } // generatorPeriod
 
   /**
    * Returns the period of the values returned by the Inversive Random Number Generator.
@@ -230,7 +214,7 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
       count++;
     }
     return count;
-  }
+  } // getPeriod
 
   /**
    * Returns value of p.
@@ -247,7 +231,7 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
     while (temp == p - 1) { // Ensures that even and odd equally likely
       temp = nextInt();
     }
-    return nextInt() % 2 == 1;
+    return temp % 2 == 1;
   } // nextBoolean
 
   @Override

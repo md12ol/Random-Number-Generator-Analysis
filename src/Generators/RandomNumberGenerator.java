@@ -13,7 +13,7 @@ public interface RandomNumberGenerator {
   /**
    * Implements Gordon's algorithm for generating large strong primes.  Algorithm found within
    * Chapter 4 of Handbook of Applied Cryptography by A. Menezes, P. Van Oorschot, and S. Vanstone
-   * which is included as 'Handbook of Applied Crytography Chapter 4 - Public Key Parameters.pdf.' A
+   * which is included as 'Handbook of Applied Cryptography Chapter 4 - Public Key Parameters.pdf.' A
    * prime is returned with probability 1 - 2^(-100).  This prime has length ~bitLength bits.
    *
    * @param rand Random number generator
@@ -77,7 +77,7 @@ public interface RandomNumberGenerator {
   } // getPrime
 
   /**
-   * Tests if lessThan is greater than min.  If not, an IllegalArguementException is thrown.
+   * Tests if lessThan is greater than min.  If not, an IllegalArgumentException is thrown.
    *
    * @param min lower bound of range (inclusive)
    * @param lessThan upper bound of range (exclusive)
@@ -91,7 +91,7 @@ public interface RandomNumberGenerator {
   } // testRange
 
   /**
-   * Tests if length is greater than 0.  If not, an IllegalArguementException is thrown.
+   * Tests if length is greater than 0.  If not, an IllegalArgumentException is thrown.
    *
    * @param length length of list
    * @throws IllegalArgumentException if length is less than or equal to 0
