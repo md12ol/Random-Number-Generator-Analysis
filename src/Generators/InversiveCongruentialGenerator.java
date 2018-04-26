@@ -127,15 +127,31 @@ public class InversiveCongruentialGenerator implements RandomNumberGenerator {
       if (notSquares(prime, c)) {
         if (sufficientPeriod(prime, c)) {
           potA = (int) pow(bVal, 2) / (c + 2);
-          if (generatorPeriod(prime, potA, bVal, seed) == prime) {
-            a = potA;
-            return true;
+          if (gcd(potA, bVal) == 1) {
+            if (generatorPeriod(prime, potA, bVal, seed) == prime) {
+              a = potA;
+              return true;
+            }
           }
         }
       }
     }
     return false;
   } // findAndSetA
+
+  /**
+   * Returns the greatest common divisor of one and two.
+   *
+   * @param one first int
+   * @param two second int
+   * @return greatest common divisor of one and two
+   */
+  private int gcd(int one, int two) {
+    BigInteger bigOne = new BigInteger(String.valueOf(one));
+    BigInteger bigTwo = new BigInteger(String.valueOf(two));
+    BigInteger gcdBig = bigOne.gcd(bigOne);
+    return gcdBig.intValue();
+  }
 
   /**
    * Returns true if c + 2 and c^2 - 4 are not squares.  If they are not squares, then then the

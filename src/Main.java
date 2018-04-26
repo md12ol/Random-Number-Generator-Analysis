@@ -32,8 +32,8 @@ public class Main {
   private static final Random RAND_GEN = new Random(RANDOM_SEED);
 
   public static void main(String[] args) {
-//    displayResults(); // Run this to see some cool stuff from the generators
-    gatherDataForReport(); // Run this to generate data for the report
+    displayResults(); // Run this to see some cool stuff from the generators
+//    gatherDataForReport(); // Run this to generate data for the report
   } // main
 
   /**
