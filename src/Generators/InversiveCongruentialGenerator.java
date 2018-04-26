@@ -14,7 +14,7 @@ import java.util.Random;
  * <pre>
  *   Inversive Congruential Generator Overview:
  *   p is a prime number greater than or equal to 5
- *   a, b are positive integers
+ *   a, b are positive integers such that gcd(a,b) = 0
  *   n >= 0
  *   (x_n)^(-1) is the modular multiplicative inverse of x_n: x_n * (x_n)^(-1) ≡ 1 (mod p)
  *   x_n+1 = { a * (x_n)^(-1) + b (mod p)    x_n >= 1}
